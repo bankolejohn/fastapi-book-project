@@ -2,7 +2,7 @@ name: CI Pipeline
 
 # Trigger the workflow on pull requests to the main branch
 on:
-  push:
+  pull_request:
     branches:
       - main
 
