@@ -1,0 +1,45 @@
+# Ignore Python virtual environment
+venv/
+.env/
+
+# Ignore IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Ignore local development files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+
+# Ignore logs and cache
+logs/
+*.log
+.cache/
+
+# Ignore Docker-related files (except Dockerfile)
+docker-compose.yml
+docker-compose.*.yml
+.dockerignore
+
+# Ignore Git files
+.git/
+.gitignore
+
+# Ignore test files (if not needed in production)
+tests/
+
+# Ignore local configuration files
+.env
+.env.local
+.env.*
+secrets/
+
+# Ignore build and distribution files
+dist/
+build/
+*.egg-info/
