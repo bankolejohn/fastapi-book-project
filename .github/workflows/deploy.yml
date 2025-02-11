@@ -132,5 +132,5 @@ jobs:
           docker pull bankolejohn/fastapi-app:latest
           # docker stop fastapi-app || true
           # docker rm fastapi-app || true
-          # docker run -d -p 80:80 --name fastapi-app $DOCKER_HUB_USERNAME/fastapi-app:latest
+          docker run -d -p 80:8000 --name fastapi-app $DOCKER_HUB_USERNAME/fastapi-app:latest
           EOF
