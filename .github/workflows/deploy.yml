@@ -49,8 +49,8 @@ jobs:
          name: id_rsa  # Optional: Default is 'id_rsa'
          known_hosts: 'github.com'  # Automatically adds GitHub to known_hosts
 
-      - name: Test SSH Connection
-        run: ssh -T git@github.com
+      # - name: Test SSH Connection
+      #   run: ssh -T git@github.com
 
       # Deploy to AWS EC2
       - name: Deploy to EC2
