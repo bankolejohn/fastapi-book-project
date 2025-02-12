@@ -129,8 +129,10 @@ jobs:
           # SSH into the EC2 instance and deploy the Docker image
           ssh -t -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST << 'EOF'
           # docker pull $DOCKER_HUB_USERNAME/fastapi-app:latest
+          echo "pulling image for $DOCKER_HUB_USERNAME"
           docker pull bankolejohn/fastapi-app:latest
           # docker stop fastapi-app || true
           # docker rm fastapi-app || true
+          echo "running pulled image"
           docker run -d -p 80:80 --name fastapp $DOCKER_HUB_USERNAME/fastapi-app:latest
           EOF
