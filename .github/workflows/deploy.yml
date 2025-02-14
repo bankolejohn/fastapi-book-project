@@ -133,7 +133,6 @@ jobs:
           cd fast-api-book-project \
           git stash \
           git pull origin main \
-          
           # docker pull bankolejohn/fastapi-app:latest
           docker stop fastapi-app || true && \
           docker rm fastapi-app || true && \
