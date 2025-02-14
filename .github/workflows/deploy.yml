@@ -135,4 +135,4 @@ jobs:
           docker stop fastapi-app || true && \
           docker rm fastapi-app || true && \
           echo "running pulled image" && \
-          docker run -d -p 8000:8000 --name fastapi-app $DOCKER_HUB_USERNAME/fastapi-app:latest"
+          docker run -d --restart always-p 8000:8000 --name fastapi-app $DOCKER_HUB_USERNAME/fastapi-app:latest"
