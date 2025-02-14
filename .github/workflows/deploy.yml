@@ -128,9 +128,6 @@ jobs:
         run: |
           # SSH into the EC2 instance and deploy the Docker image
           ssh -t -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST \
-          # cd fastapi-book-project \
-          # git stash \
-          # git pull origin main \
           "echo "pulling image for $DOCKER_HUB_USERNAME" \
           docker pull $DOCKER_HUB_USERNAME/fastapi-app:latest && \
           
