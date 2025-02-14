@@ -23,3 +23,7 @@ async def health_check():
     return {"status": "active"} 
 
 
+
+@app.get("/stage2")
+async def stage2():
+    return {"message": "welcome to stage 2"}
