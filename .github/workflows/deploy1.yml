@@ -1,0 +1,35 @@
+name: Deploy FastAPI App
+
+on:
+  push:
+    branches:
+      - main  # Trigger only when merging to main
+
+jobs:
+  deploy:
+    name: deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout the repo
+        uses: actions/checkout@v4
+
+      - name: Deploy to EC2
+        env:
+          EC2_USER: ubuntu  # Change if using another user
+          EC2_HOST: ${{ secrets.EC2_HOST }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+          echo "$SSH_PRIVATE_KEY" > private_key && chmod 600 private_key
+          ssh -i private_key -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST '
+            cd fastapi-book-project && \
+            git fetch origin main && \
+            git reset --hard origin/main && \
+            echo "Installing dependencies..." && \
+            source /home/ubuntu/.bashrc && \
+            python3 -m venv venv && \
+            source venv/bin/activate && \
+            pip install -r requirements.txt && \
+            echo "Restarting the application..." && \
+            sudo systemctl restart fastapi-app
+          '
