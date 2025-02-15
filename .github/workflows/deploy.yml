@@ -3,7 +3,7 @@ name: Deploy FastAPI App
 on:
   push:
     branches:
-      - main  # Trigger only when merging to main
+      # - main  # Trigger only when merging to main
 
 jobs:
   deploy:
@@ -20,7 +20,7 @@ jobs:
           EC2_HOST: ${{ secrets.EC2_HOST }}
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
-          echo "$SSH_PRIVATE_KEY" > private_key && chmod 600 private_key
+          # echo "$SSH_PRIVATE_KEY" > private_key && chmod 600 private_key
           ssh -i private_key -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST '
             cd fastapi-book-project && \
             git fetch origin main && \
