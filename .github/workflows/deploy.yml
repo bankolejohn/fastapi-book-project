@@ -125,26 +125,14 @@ jobs:
           EC2_HOST: ${{ secrets.EC2_HOST }}  # EC2 instance public IP or DNS
           EC2_USER: ${{ secrets.EC2_USER }}  # EC2 instance username (e.g., ubuntu)
           DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}  # Docker Hub username
+     
         run: |
-          echo "${{ secrets.EC2_PUBLIC_KEY }}" > known_hosts  # Create known_hosts file
-          scp -o StrictHostKeyChecking=yes -o UserKnownHostsFile=known_hosts deploy.sh $EC2_USER@$EC2_HOST:~/
-          ssh -o StrictHostKeyChecking=yes -o UserKnownHostsFile=known_hosts $EC2_USER@$EC2_HOST "chmod +x ~/deploy.sh && ~/deploy.sh"
-        # run: |
-        #   scp deploy.sh $EC2_USER@$EC2_HOST:~/
-        #   ssh -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST "chmod +x ~/deploy.sh && ~/deploy.sh"
-        # run: |
-        #   # SSH into the EC2 instance and deploy the Docker image
-        #   ssh -t -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST '
-        #   # echo "pulling image for $DOCKER_HUB_USERNAME" && \
-        #   docker pull bankolejohn/fastapi-app:latest && \
-        #   # cd fastapi-book-project && 
-        #   # git stash && 
-        #   # git pull origin main && 
-        #   # docker pull bankolejohn/fastapi-app:latest \
-        #   # docker stop fastapi-app && \
-        #   docker stop fastapi-app || true && \
-        #   docker rm fastapi-app || true && \
-        #   echo "running pulled image" && \
-        #   docker run -d --restart always -p 8000:8000 --name fastapi-app $DOCKER_HUB_USERNAME/fastapi-app:latest
-        #   '
+          # SSH into the EC2 instance and deploy the Docker image
+          ssh -t -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST '
+          docker pull bankolejohn/fastapi-app:latest && \
+          docker stop fastapi-app || true && \
+          docker rm fastapi-app || true && \
+          echo "running pulled image" && \
+          docker run -d --restart always -p 8000:8000 --name fastapi-app bankolejohn/fastapi-app:latest
+          '
         
